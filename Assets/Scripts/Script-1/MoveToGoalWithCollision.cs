@@ -10,6 +10,21 @@ public class MoveToGoalWithCollision : Agent
     private float moveSpeed = 1f;
     private List<Vector3> possiblePositions = new List<Vector3>();
 
+    private GridMap gridMap;
+
+    private void Start()
+    {
+        gridMap = FindObjectOfType<GridMap>();
+        if (gridMap != null)
+        {
+            possiblePositions = gridMap.ReceivePositions();
+        }
+        else
+        {
+            Debug.LogError("GridMap not found.");
+        }
+    }
+
     public override void OnEpisodeBegin() {
         if (possiblePositions.Count == 0)
         {
@@ -62,11 +77,6 @@ public class MoveToGoalWithCollision : Agent
     {
         SetReward(rewardValue);
         EndEpisode();
-    }
-
-    public void ReceivePositions(List<Vector3> positions)
-    {
-       possiblePositions = positions;
     }
 
 }

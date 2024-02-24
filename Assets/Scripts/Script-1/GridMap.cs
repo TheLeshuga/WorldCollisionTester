@@ -16,7 +16,7 @@ public class GridMap : MonoBehaviour
     private List<MoveToGoalWithCollision> moveToGoal = new List<MoveToGoalWithCollision>();
     private List<Vector3> possiblePositions = new List<Vector3>();
 
-    private void Start()
+    private void Awake()
     {
         // Verificar si las listas tienen el mismo número de elementos
         if (floorObjects.Count != lowerLeftCornerPositions.Count)
@@ -41,14 +41,6 @@ public class GridMap : MonoBehaviour
             FindPossiblePositions(width, height, bottomLeft);
         }
 
-        // Obtener los scripts MoveToGoalWithCollision y enviar las posiciones
-        MoveToGoalWithCollision[] scripts = GameObject.FindObjectsOfType<MoveToGoalWithCollision>();
-        moveToGoal.AddRange(scripts);
-
-        foreach (MoveToGoalWithCollision script in moveToGoal)
-        {
-            script.ReceivePositions(possiblePositions);
-        }
     }
 
     private void FindPossiblePositions(int width, int height, Vector3 bottomLeft)
@@ -105,5 +97,9 @@ public class GridMap : MonoBehaviour
             Debug.DrawLine(bottomLeft + new Vector3(width * cellSize, 0, 0), bottomLeft + new Vector3(width * cellSize, 0, height * cellSize), Color.black, 100f); // top
             Debug.DrawLine(bottomLeft + new Vector3(0, 0, height * cellSize), bottomLeft + new Vector3(width * cellSize, 0, height * cellSize), Color.black, 100f); // right
         }
+    }
+
+    public List<Vector3> ReceivePositions() {
+        return possiblePositions;
     }
 }
