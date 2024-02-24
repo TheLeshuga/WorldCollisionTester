@@ -11,6 +11,7 @@ public class MoveToGoalWithCollision : Agent
     private List<Vector3> possiblePositions = new List<Vector3>();
 
     private GridMap gridMap;
+    private OverlapDetectorWithReward overlapDetector;
 
     private void Start()
     {
@@ -21,8 +22,16 @@ public class MoveToGoalWithCollision : Agent
         }
         else
         {
-            Debug.LogError("GridMap not found.");
+            Debug.LogError("GridMap component not found.");
         }
+
+        overlapDetector = GetComponent<OverlapDetectorWithReward>();
+        if (overlapDetector == null)
+        {
+            Debug.LogError("OverlapDetectorWithReward component not found.");
+        }
+
+        OverlapDetectorWithReward.OnCollisionDetected += HandleCollisionDetected;
     }
 
     public override void OnEpisodeBegin() {
@@ -73,8 +82,15 @@ public class MoveToGoalWithCollision : Agent
         
     }
 
+    private void HandleCollisionDetected(float rewardValue)
+    {
+        Debug.Log("HANDLE ENTER");
+        AddRewardFromDetector(rewardValue);
+    }
+
     public void AddRewardFromDetector(float rewardValue)
     {
+        Debug.Log("LLEGA CON: " + rewardValue);
         SetReward(rewardValue);
         EndEpisode();
     }

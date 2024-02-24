@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 public class OverlapDetectorWithReward : MonoBehaviour
 {
-    private MoveToGoalWithCollision moveToGoal;
+    public delegate void CollisionDetected(float rewardValue);
+    public static event CollisionDetected OnCollisionDetected;
+
     public enum OverlapType { Capsule, Box, Sphere }; // Enum para elegir el tipo de overlap
 
     public List<string> layersToDetect; // Lista de nombres de capas que deseamos detectar
@@ -13,16 +15,6 @@ public class OverlapDetectorWithReward : MonoBehaviour
 
     // Lista para almacenar los puntos de colision y sus rangos
     private List<(Vector3 point, float range)> collisionPoints = new List<(Vector3, float)>();
-
-    void Start()
-    {
-        // Obtener una referencia al componente MoveToGoal
-        moveToGoal = GetComponent<MoveToGoalWithCollision>();
-        if (moveToGoal == null)
-        {
-            Debug.LogError("MoveToGoalWithCollision component not found.");
-        }
-    }
 
     void Update()
     {
@@ -58,7 +50,8 @@ public class OverlapDetectorWithReward : MonoBehaviour
                     if (Vector3.Distance(point, collisionPoint) <= range)
                     {
                         foundCollision = true;
-                        moveToGoal.AddRewardFromDetector(0.0f);
+                        //moveToGoal.AddRewardFromDetector(0.0f);
+                        OnCollisionDetected?.Invoke(0.0f);
                         Debug.Log("Already reached position: " + collisionPoint);
                         break;
                     }
@@ -68,7 +61,8 @@ public class OverlapDetectorWithReward : MonoBehaviour
                 {
                     // Si no se encuentra el punto de colision en ningun rango, agregarlo a la lista
                     collisionPoints.Add((collisionPoint, 1.0f)); // Se puede ajustar el rango segun sea necesario
-                    moveToGoal.AddRewardFromDetector(1.0f);
+                    //moveToGoal.AddRewardFromDetector(1.0f);
+                    OnCollisionDetected?.Invoke(1.0f);
                     Debug.Log("Reached: " + LayerMask.LayerToName(collider.gameObject.layer) + " at position: " + collisionPoint);
                 }
             }
