@@ -62,7 +62,7 @@ public class MoveToGoalWithCollision : Agent
         if (StepCount >= MaxStep)
         {
             Debug.Log("Reached MAX STEP");
-            SetReward(-1f);
+            SetReward(-0.5f);
         }
     }
 
@@ -84,13 +84,13 @@ public class MoveToGoalWithCollision : Agent
 
     private void HandleCollisionDetected(float rewardValue)
     {
-        Debug.Log("HANDLE ENTER");
+        //Debug.Log("HANDLE ENTER");
         AddRewardFromDetector(rewardValue);
     }
 
     public void AddRewardFromDetector(float rewardValue)
     {
-        Debug.Log("LLEGA CON: " + rewardValue);
+        //Debug.Log("LLEGA CON: " + rewardValue);
         SetReward(rewardValue);
         EndEpisode();
     }

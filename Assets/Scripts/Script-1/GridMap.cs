@@ -61,7 +61,7 @@ public class GridMap : MonoBehaviour
                 // Crear un cubo en la posición actual
                 GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 cube.transform.position = startPos + new Vector3(cellSize / 2f, cellSize / 2f, cellSize / 2f);
-                Debug.Log("POS Y: " + cube.transform.position.y);
+                //Debug.Log("POS Y: " + cube.transform.position.y);
                 cube.transform.localScale = new Vector3(cellSize, cellSize, cellSize);
 
                 // Comprobar si el cubo colisiona con objetos en el layer deseado
