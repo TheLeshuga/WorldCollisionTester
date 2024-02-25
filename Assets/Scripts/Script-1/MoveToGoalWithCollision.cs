@@ -31,7 +31,7 @@ public class MoveToGoalWithCollision : Agent
             Debug.LogError("OverlapDetectorWithReward component not found.");
         }
 
-        OverlapDetectorWithReward.OnCollisionDetected += HandleCollisionDetected;
+        overlapDetector.OnCollisionDetected += HandleCollisionDetected;
     }
 
     public override void OnEpisodeBegin() {

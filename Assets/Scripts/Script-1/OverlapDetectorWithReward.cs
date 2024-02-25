@@ -1,10 +1,10 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class OverlapDetectorWithReward : MonoBehaviour
 {
-    public delegate void CollisionDetected(float rewardValue);
-    public static event CollisionDetected OnCollisionDetected;
+    public event Action<float> OnCollisionDetected;
 
     public enum OverlapType { Capsule, Box, Sphere }; // Enum para elegir el tipo de overlap
 
@@ -44,13 +44,12 @@ public class OverlapDetectorWithReward : MonoBehaviour
                 Vector3 collisionPoint = collider.ClosestPoint(transform.position);
                 bool foundCollision = false;
 
-                // Verificar si el punto de colision esta dentro de algún rango almacenado
+                // Verificar si el punto de colision esta dentro de algun rango almacenado
                 foreach ((Vector3 point, float range) in collisionPoints)
                 {
                     if (Vector3.Distance(point, collisionPoint) <= range)
                     {
                         foundCollision = true;
-                        //moveToGoal.AddRewardFromDetector(0.0f);
                         OnCollisionDetected?.Invoke(0.0f);
                         Debug.Log("Already reached position: " + collisionPoint);
                         break;
@@ -60,8 +59,7 @@ public class OverlapDetectorWithReward : MonoBehaviour
                 if (!foundCollision)
                 {
                     // Si no se encuentra el punto de colision en ningun rango, agregarlo a la lista
-                    collisionPoints.Add((collisionPoint, 1.0f)); // Se puede ajustar el rango segun sea necesario
-                    //moveToGoal.AddRewardFromDetector(1.0f);
+                    collisionPoints.Add((collisionPoint, 1.0f));
                     OnCollisionDetected?.Invoke(1.0f);
                     Debug.Log("Reached: " + LayerMask.LayerToName(collider.gameObject.layer) + " at position: " + collisionPoint);
                 }
