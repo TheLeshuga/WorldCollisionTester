@@ -13,7 +13,6 @@ public class GridMap : MonoBehaviour
 
     public bool debugMode = false;
 
-    private List<MoveToGoalWithCollision> moveToGoal = new List<MoveToGoalWithCollision>();
     private List<Vector3> possiblePositions = new List<Vector3>();
 
     private void Awake()
