@@ -62,7 +62,7 @@ public class MoveToGoalWithCollision : Agent
         if (StepCount >= MaxStep)
         {
             Debug.Log("Reached MAX STEP");
-            SetReward(-0.5f);
+            SetReward(-0.25f);
         }
     }
 
