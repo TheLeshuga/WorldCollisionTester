@@ -7,6 +7,7 @@ public class GridMap : MonoBehaviour
     public List<GameObject> lowerLeftCornerPositions;
 
     public float cellSize;
+    public float gridCubeYSize;
 
     public LayerMask obstacleLayer; // Layer para obstaculos
     public LayerMask groundLayer; // Layer para el suelo
@@ -14,6 +15,7 @@ public class GridMap : MonoBehaviour
     public bool debugMode = false;
 
     private List<Vector3> possiblePositions = new List<Vector3>();
+    //private List<Vector3> allPositions = new List<Vector3>();
 
     private void Awake()
     {
@@ -61,15 +63,15 @@ public class GridMap : MonoBehaviour
                 GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 cube.transform.position = startPos + new Vector3(cellSize / 2f, cellSize / 2f, cellSize / 2f);
                 //Debug.Log("POS Y: " + cube.transform.position.y);
-                cube.transform.localScale = new Vector3(cellSize, cellSize, cellSize);
+                cube.transform.localScale = new Vector3(cellSize, gridCubeYSize, cellSize);
 
                 // Comprobar si el cubo colisiona con objetos en el layer deseado
                 Collider[] colliders = Physics.OverlapBox(cube.transform.position, cube.transform.localScale / 2f, Quaternion.identity, obstacleLayer);
                 if (colliders.Length > 0)
                 {
-                    // Si hay colisión con el layer de obstáculos, cambiar el color del cubo a rojo
                     Renderer cubeRenderer = cube.GetComponent<Renderer>();
                     cubeRenderer.material.color = Color.red;
+                    //allPositions.Add(cube.transform.position);
                 }
                 else
                 {
@@ -77,11 +79,10 @@ public class GridMap : MonoBehaviour
                     Collider[] groundColliders = Physics.OverlapBox(cube.transform.position, cube.transform.localScale / 2f, Quaternion.identity, groundLayer);
                     if (groundColliders.Length > 0)
                     {
-                        // Si hay colisión con el layer de suelo, cambiar el color del cubo a verde
                         Renderer cubeRenderer = cube.GetComponent<Renderer>();
                         cubeRenderer.material.color = Color.green;
-                        //print(cube.transform.position);
                         possiblePositions.Add(cube.transform.position);
+                        //allPositions.Add(cube.transform.position);
                     }
                 }
 
@@ -101,4 +102,8 @@ public class GridMap : MonoBehaviour
     public List<Vector3> ReceivePositions() {
         return possiblePositions;
     }
+
+    /*public List<Vector3> ReceiveAllPositions() {
+        return allPositions;
+    }*/
 }
