@@ -137,10 +137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995077663cffa3846a1d8099582c0ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
   layersToDetect:
   - wall
   overlapType: 0
@@ -386,16 +382,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorObjects:
   - {fileID: 1663569255}
+  - {fileID: 1672919546}
   lowerLeftCornerPositions:
   - {fileID: 1843056003}
-  cellSize: 2
+  - {fileID: 665742755}
+  cellSizeList:
+  - 2
+  - 2
+  gridCubeYSize:
+  - 2
+  - 2
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  debugMode: 0
+  debugMode: 1
 --- !u!1 &665742755
 GameObject:
   m_ObjectHideFlags: 0
