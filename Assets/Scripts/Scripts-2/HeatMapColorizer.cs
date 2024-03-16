@@ -52,9 +52,16 @@ public class HeatMapColorizer : MonoBehaviour
                 Renderer renderer = cube.GetComponent<Renderer>();
                 Color currentColor = renderer.material.color;
 
-                currentColor.r += colorAdjuster;
-                currentColor.b -= colorAdjuster;
-
+                if (currentColor.g < 1f && currentColor.b != 0f)
+                {
+                    currentColor.g += colorAdjuster;
+                    currentColor.b -= colorAdjuster;
+                }
+                else
+                {
+                    currentColor.r += colorAdjuster;
+                    currentColor.g -= colorAdjuster;
+                }
                 renderer.material.color = currentColor;
             }
         }
