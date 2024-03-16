@@ -9,7 +9,8 @@ public class HeatMapReader : MonoBehaviour
     public static bool finished = false;
 
     private PositionData[] positionDatas;
-    public List<Vector3> allPositions;
+    private List<Vector3> allPositions;
+    
     public static List<Vector3> nearestPositions;
 
     void Start()
