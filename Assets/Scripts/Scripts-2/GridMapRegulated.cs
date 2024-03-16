@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class GridMapRegulated : MonoBehaviour
 {
@@ -14,8 +15,10 @@ public class GridMapRegulated : MonoBehaviour
     public LayerMask groundLayer; // Layer para el suelo
 
     public bool debugMode = false;
+    private bool heatMapMode = false;
 
     private List<Vector3> possiblePositions = new List<Vector3>();
+    private List<Vector3> allPositions = new List<Vector3>();
 
     private void Awake()
     {
@@ -66,13 +69,14 @@ public class GridMapRegulated : MonoBehaviour
                 //Debug.Log("POS Y: " + cube.transform.position.y);
                 cube.transform.localScale = new Vector3(cellSize, cubeYSize, cellSize);
 
+                allPositions.Add(cube.transform.position);
+
                 // Comprobar si el cubo colisiona con objetos en el layer deseado
                 Collider[] colliders = Physics.OverlapBox(cube.transform.position, cube.transform.localScale / 2f, Quaternion.identity, obstacleLayer);
                 if (colliders.Length > 0)
                 {
                     Renderer cubeRenderer = cube.GetComponent<Renderer>();
                     cubeRenderer.material.color = Color.red;
-                    //allPositions.Add(cube.transform.position);
                 }
                 else
                 {
@@ -83,11 +87,12 @@ public class GridMapRegulated : MonoBehaviour
                         Renderer cubeRenderer = cube.GetComponent<Renderer>();
                         cubeRenderer.material.color = Color.green;
                         possiblePositions.Add(cube.transform.position);
-                        //allPositions.Add(cube.transform.position);
                     }
                 }
 
                 if(!debugMode) Destroy(cube);
+                if(heatMapMode) cube.tag = "heatBox";
+
             }
         }
 
@@ -104,7 +109,24 @@ public class GridMapRegulated : MonoBehaviour
         return possiblePositions;
     }
 
-    /*public List<Vector3> ReceiveAllPositions() {
-        return allPositions;
-    }*/
+    public List<Vector3> ReceiveAllPositions() {
+        List<Vector3> sortedPositions = allPositions.OrderBy(v => v.z).ThenBy(v => v.x).ToList();
+        return sortedPositions;
+    }
+
+    public void CreateHeatMapGrid(float Xshift) {
+        debugMode = true;
+        heatMapMode = true;
+        
+        for (int i = 0; i < lowerLeftCornerPositions.Count; i++)
+        {
+            GameObject lowerLeftCornerPos = lowerLeftCornerPositions[i];
+
+            Vector3 bottomLeft = lowerLeftCornerPos.transform.position;
+            
+            bottomLeft += new Vector3(Xshift, 0f, 0f);
+
+            FindPossiblePositions(Mathf.RoundToInt(floorWidths[i] / cellSizeList[i]), Mathf.RoundToInt(floorHeights[i] / cellSizeList[i]), bottomLeft, cellSizeList[i], gridCubeYSize[i]);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class GridMap : MonoBehaviour
 {
@@ -13,8 +14,10 @@ public class GridMap : MonoBehaviour
     public LayerMask groundLayer; // Layer para el suelo
 
     public bool debugMode = false;
-
+    private bool heatMapMode = false;
+    
     private List<Vector3> possiblePositions = new List<Vector3>();
+    private List<Vector3> allPositions = new List<Vector3>();
 
     private void Awake()
     {
@@ -76,6 +79,8 @@ public class GridMap : MonoBehaviour
                 //Debug.Log("POS Y: " + cube.transform.position.y);
                 cube.transform.localScale = new Vector3(cellSize, cubeYSize, cellSize);
 
+                allPositions.Add(cube.transform.position);
+
                 // Comprobar si el cubo colisiona con objetos en el layer deseado
                 Collider[] colliders = Physics.OverlapBox(cube.transform.position, cube.transform.localScale / 2f, Quaternion.identity, obstacleLayer);
                 if (colliders.Length > 0)
@@ -96,6 +101,7 @@ public class GridMap : MonoBehaviour
                 }
 
                 if(!debugMode) Destroy(cube);
+                if(heatMapMode) cube.tag = "heatBox";
             }
         }
 
@@ -110,6 +116,31 @@ public class GridMap : MonoBehaviour
 
     public List<Vector3> ReceivePositions() {
         return possiblePositions;
+    }
+
+    public List<Vector3> ReceiveAllPositions() {
+        return allPositions;
+    }
+
+    public void CreateHeatMapGrid(float Xshift) {
+        debugMode = true;
+        heatMapMode = true;
+
+        for (int i = 0; i < floorObjects.Count; i++)
+        {
+            GameObject floorObject = floorObjects[i];
+            GameObject lowerLeftCornerPos = lowerLeftCornerPositions[i];
+
+            Renderer renderer = floorObject.GetComponent<Renderer>();
+            int width = Mathf.RoundToInt(renderer.bounds.size.x / cellSizeList[i]);
+            int height = Mathf.RoundToInt(renderer.bounds.size.z / cellSizeList[i]);
+
+            Vector3 bottomLeft = lowerLeftCornerPos.transform.position;
+
+            bottomLeft += new Vector3(Xshift, 0f, 0f);
+
+            FindPossiblePositions(width, height, bottomLeft, cellSizeList[i], gridCubeYSize[i]);
+        }
     }
 
 }
