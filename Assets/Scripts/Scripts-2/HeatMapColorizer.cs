@@ -15,7 +15,7 @@ public class HeatMapColorizer : MonoBehaviour
     private Dictionary<Vector3, GameObject> cubeDictionary = new Dictionary<Vector3, GameObject>();
 
     void Start() {
-        heatBoxes = GameObject.FindGameObjectsWithTag("heatBox");
+    heatBoxes = GameObject.FindGameObjectsWithTag("heatBox");
 
         foreach (GameObject item in heatBoxes)
         {
@@ -25,9 +25,17 @@ public class HeatMapColorizer : MonoBehaviour
             cubeDictionary.Add(item.transform.position, item);
         }
 
-        Xshift = HeatMapReader.Xshift;
-
+        HeatMapReader heatMapReader = FindObjectOfType<HeatMapReader>();
+        if (heatMapReader != null)
+        {
+            Xshift = heatMapReader.Xshift;
+        }
+        else
+        {
+            Debug.LogError("Could not find the HeatMapReader component in the scene.");
+        }
     }
+
 
     void Update()
     {

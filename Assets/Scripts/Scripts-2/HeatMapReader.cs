@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class HeatMapReader : MonoBehaviour
 {
     public float readFrequency = 20f;
-    public static float Xshift = 50f;
+    public float Xshift = 50f;
 
     public static bool finished = false;
 
