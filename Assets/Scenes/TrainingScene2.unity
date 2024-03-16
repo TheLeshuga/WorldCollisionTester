@@ -816,7 +816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b83222e7b4f7784fa8bae6de2403629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionTrackingFrequency: 2
+  trackingFreq: 1
   posArray: []
 --- !u!1001 &345259529
 PrefabInstance:
@@ -1354,7 +1354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentGameObject: {fileID: 332685555}
-  numClones: 1
+  numClones: 4
   ignoreAgentColliders: 1
   agentLayerName: agent
 --- !u!4 &530495231
@@ -1438,9 +1438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b38631144aaf4488395e19600d9ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theHeat: {fileID: 778777643}
-  readFrequency: 10
-  Xshift: 50
+  readFrequency: 15
 --- !u!114 &530495235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1455,7 +1453,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowableDistance: 2
   colorAdjuster: 0.2
-  color: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1001 &604050331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3729,10 +3726,10 @@ PrefabInstance:
     - target: {fileID: 4086710613438633928, guid: 884ad08685dafd34bae0f1f040abd2b0, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5022602860645237092, guid: 5a09b63a4dd75e4479a475cd77c1e45b, type: 3}
     - target: {fileID: 4086710613438633928, guid: 884ad08685dafd34bae0f1f040abd2b0, type: 3}
       propertyPath: m_BehaviorType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4086710613438633928, guid: 884ad08685dafd34bae0f1f040abd2b0, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
