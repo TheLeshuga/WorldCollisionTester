@@ -1334,6 +1334,7 @@ GameObject:
   - component: {fileID: 530495233}
   - component: {fileID: 530495234}
   - component: {fileID: 530495235}
+  - component: {fileID: 530495236}
   m_Layer: 0
   m_Name: Scripter
   m_TagString: Untagged
@@ -1433,13 +1434,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530495229}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09b38631144aaf4488395e19600d9ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   readFrequency: 15
+  Xshift: 50
 --- !u!114 &530495235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530495229}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a7411de0695df4e8bce01425413fd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allowableDistance: 2
+  colorAdjuster: 0.2
+--- !u!114 &530495236
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1448,11 +1464,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 530495229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00a7411de0695df4e8bce01425413fd3, type: 3}
+  m_Script: {fileID: 11500000, guid: f7df799c981a2dd479d5ce69e37cf456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowableDistance: 2
-  colorAdjuster: 0.2
+  fileName: prueba
 --- !u!1001 &604050331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3729,7 +3744,7 @@ PrefabInstance:
       objectReference: {fileID: 5022602860645237092, guid: 5a09b63a4dd75e4479a475cd77c1e45b, type: 3}
     - target: {fileID: 4086710613438633928, guid: 884ad08685dafd34bae0f1f040abd2b0, type: 3}
       propertyPath: m_BehaviorType
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4086710613438633928, guid: 884ad08685dafd34bae0f1f040abd2b0, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
