@@ -16,6 +16,20 @@ public class OverlapDetectorWithReward : MonoBehaviour
     // Lista para almacenar los puntos de colision y sus rangos
     private List<(Vector3 point, float range)> collisionPoints = new List<(Vector3, float)>();
 
+    private CSVManager csvManager;
+
+    void Start()
+    {
+        // Obtener la referencia al script CSVManager del GameObject que lo contiene
+        csvManager = GameObject.FindObjectOfType<CSVManager>();
+
+        // Verificar si se encontró el CSVManager
+        if (csvManager == null)
+        {
+            Debug.LogError("No CSVManager script found in the scene.");
+        }
+    }
+
     void Update()
     {
         Collider[] colliders;
@@ -52,6 +66,7 @@ public class OverlapDetectorWithReward : MonoBehaviour
                         foundCollision = true;
                         OnCollisionDetected?.Invoke(0.0f);
                         Debug.Log("Already reached position: " + collisionPoint);
+                        csvManager.SaveVector(collisionPoint, gameObject.name);
                         break;
                     }
                 }
@@ -60,6 +75,7 @@ public class OverlapDetectorWithReward : MonoBehaviour
                 {
                     // Si no se encuentra el punto de colision en ningun rango, agregarlo a la lista
                     collisionPoints.Add((collisionPoint, 1.0f));
+                    csvManager.SaveVector(collisionPoint, gameObject.name);
                     OnCollisionDetected?.Invoke(1.0f);
                     Debug.Log("Reached: " + LayerMask.LayerToName(collider.gameObject.layer) + " at position: " + collisionPoint);
                 }

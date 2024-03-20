@@ -11,9 +11,10 @@ public class CloneAgent : MonoBehaviour
     {
         if (agentGameObject != null)
         {
-            for (int i = 0; i < numClones; i++)
+            for (int i = 1; i <= numClones; i++)
             {
                 GameObject clonedObject = Instantiate(agentGameObject); // Crea una copia del objeto original
+                clonedObject.name = agentGameObject.name + "_" + i; // Asigna un nombre único basado en el nombre del objeto original y el número de instancia
                 
                 // Ignorar colisiones con otros GameObjects que tengan la capa señalada
                 if (ignoreAgentColliders)
@@ -49,6 +50,7 @@ public class CloneAgent : MonoBehaviour
         }
     }
 }
+
 
 
 
