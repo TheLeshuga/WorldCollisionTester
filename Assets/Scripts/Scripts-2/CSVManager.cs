@@ -12,21 +12,23 @@ public class CSVManager : MonoBehaviour
     private Dictionary<Vector3, List<string>> vectorObjectsName;
     private Dictionary<Vector3, int> vectorCounts;
 
-    void Start()
+    void Awake()
     {
-        // Construct file path
-        fileName = fileName + ".csv";
-        string folderPath = Path.Combine(Application.dataPath, "ResultsCSV"); 
-        Directory.CreateDirectory(folderPath); 
-        filePath = Path.Combine(folderPath, fileName);
+        if(this.enabled) {
+            // Construct file path
+            fileName = fileName + ".csv";
+            string folderPath = Path.Combine(Application.dataPath, "ResultsCSV"); 
+            Directory.CreateDirectory(folderPath); 
+            filePath = Path.Combine(folderPath, fileName);
 
-        // Initialize dictionaries
-        vectorAgentObjects = new Dictionary<Vector3, List<string>>();
-        vectorObjectsName = new Dictionary<Vector3, List<string>>();
-        vectorCounts = new Dictionary<Vector3, int>();
+            // Initialize dictionaries
+            vectorAgentObjects = new Dictionary<Vector3, List<string>>();
+            vectorObjectsName = new Dictionary<Vector3, List<string>>();
+            vectorCounts = new Dictionary<Vector3, int>();
 
-        // Register SaveData method to be called when the application quits
-        Application.quitting += SaveData;
+            // Register SaveData method to be called when the application quits
+            Application.quitting += SaveData;
+        }
     }
 
     // Method to save data to CSV

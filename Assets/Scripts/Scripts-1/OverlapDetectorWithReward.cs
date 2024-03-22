@@ -66,7 +66,7 @@ public class OverlapDetectorWithReward : MonoBehaviour
                         foundCollision = true;
                         OnCollisionDetected?.Invoke(0.0f);
                         Debug.Log("Already reached position: " + collisionPoint);
-                        csvManager.SaveVector(collisionPoint, gameObject.name, collider.gameObject.name);
+                        if (csvManager != null && csvManager.enabled) csvManager.SaveVector(collisionPoint, gameObject.name, collider.gameObject.name);
                         break;
                     }
                 }
@@ -75,7 +75,7 @@ public class OverlapDetectorWithReward : MonoBehaviour
                 {
                     // Si no se encuentra el punto de colision en ningun rango, agregarlo a la lista
                     collisionPoints.Add((collisionPoint, 1.0f));
-                    csvManager.SaveVector(collisionPoint, gameObject.name, collider.gameObject.name);
+                    if (csvManager != null  && csvManager.enabled) csvManager.SaveVector(collisionPoint, gameObject.name, collider.gameObject.name);
                     OnCollisionDetected?.Invoke(1.0f);
                     Debug.Log("Reached: " + LayerMask.LayerToName(collider.gameObject.layer) + " at position: " + collisionPoint);
                 }
