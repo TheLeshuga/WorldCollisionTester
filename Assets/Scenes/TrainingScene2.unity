@@ -1467,7 +1467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7df799c981a2dd479d5ce69e37cf456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: prueba
+  fileName: Scene2_res_model
 --- !u!1001 &604050331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2696,8 +2696,8 @@ Transform:
   m_GameObject: {fileID: 1317477602}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.8, y: 8.92, z: 14.8}
-  m_LocalScale: {x: 33.940865, y: 2.2220201, z: 40.366756}
+  m_LocalPosition: {x: -18.31, y: 5.79, z: 3.99}
+  m_LocalScale: {x: 9.94094, y: 0.6508075, z: 11.82302}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3741,10 +3741,10 @@ PrefabInstance:
     - target: {fileID: 4086710613438633928, guid: 884ad08685dafd34bae0f1f040abd2b0, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5a09b63a4dd75e4479a475cd77c1e45b, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: 2f929f286e913f946ba1e1e685885ccd, type: 3}
     - target: {fileID: 4086710613438633928, guid: 884ad08685dafd34bae0f1f040abd2b0, type: 3}
       propertyPath: m_BehaviorType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4086710613438633928, guid: 884ad08685dafd34bae0f1f040abd2b0, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
