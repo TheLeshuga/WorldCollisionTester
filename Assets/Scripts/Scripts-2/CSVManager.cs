@@ -8,17 +8,21 @@ public class CSVManager : MonoBehaviour
 {
     public string fileName = "default";
     private string filePath;
-    private Dictionary<Vector3, List<string>> vectorObjectNames; // Diccionario para almacenar los nombres de objetos por vector
+    private Dictionary<Vector3, List<string>> vectorAgentObjects;
+    private Dictionary<Vector3, List<string>> vectorObjectsName;
     private Dictionary<Vector3, int> vectorCounts;
 
     void Start()
     {
         // Construct file path
         fileName = fileName + ".csv";
-        filePath = Path.Combine(Application.persistentDataPath, fileName);
+        string folderPath = Path.Combine(Application.dataPath, "ResultsCSV"); 
+        Directory.CreateDirectory(folderPath); 
+        filePath = Path.Combine(folderPath, fileName);
 
         // Initialize dictionaries
-        vectorObjectNames = new Dictionary<Vector3, List<string>>();
+        vectorAgentObjects = new Dictionary<Vector3, List<string>>();
+        vectorObjectsName = new Dictionary<Vector3, List<string>>();
         vectorCounts = new Dictionary<Vector3, int>();
 
         // Register SaveData method to be called when the application quits
@@ -39,10 +43,11 @@ public class CSVManager : MonoBehaviour
             int count = kvp.Value;
 
             // Convertir la lista de nombres de objetos a una cadena separada por comas
-            string objectNames = string.Join(",", vectorObjectNames[vector].ToArray());
+            string agentNames = string.Join(",", vectorAgentObjects[vector].ToArray());
+            string objectNames = string.Join(",", vectorObjectsName[vector].ToArray());
 
             // Append vector, count, and object names to CSV line
-            sb.AppendLine($"({vector.x},{vector.y},{vector.z});{count};{objectNames}");
+            sb.AppendLine($"({vector.x},{vector.y},{vector.z});{count};{objectNames};{agentNames}");
         }
 
         File.WriteAllText(uniqueFilePath, sb.ToString());
@@ -67,7 +72,7 @@ public class CSVManager : MonoBehaviour
     }
 
     // Method to save a Vector3 and object name to the data dictionaries
-    public void SaveVector(Vector3 vector, string objectName)
+    public void SaveVector(Vector3 vector, string agentName, string objectName)
     {
         // Check if a similar vector already exists
         Vector3 similarVector = vectorCounts.Keys.FirstOrDefault(v => Vector3.Distance(v, vector) <= 1.0f);
@@ -77,15 +82,18 @@ public class CSVManager : MonoBehaviour
             // Increment count if similar vector found
             vectorCounts[similarVector]++;
             // Add object name to the list for the similar vector
-            vectorObjectNames[similarVector].Add(objectName);
+            if (!vectorAgentObjects[similarVector].Contains(agentName)) vectorAgentObjects[similarVector].Add(agentName);
+            if (!vectorObjectsName[similarVector].Contains(objectName)) vectorObjectsName[similarVector].Add(objectName);
         }
         else
         {
             // Add new vector to dictionaries
             vectorCounts[vector] = 1;
-            vectorObjectNames[vector] = new List<string>() { objectName };
+            vectorAgentObjects[vector] = new List<string>() { agentName };
+            vectorObjectsName[vector] = new List<string>() { objectName };
         }
     }
 }
+
 
 
