@@ -2,27 +2,29 @@ using UnityEngine;
 
 public class CloneAgent : MonoBehaviour
 {
-    public GameObject agentGameObject; // Referencia al GameObject original que se quiere clonar
+    public GameObject agentGameObject; // Reference to the original agent to be cloned
     public int numClones = 0;
-    public bool ignoreAgentColliders = true; // Opción para determinar si se deben ignorar las colisiones con los agentes
-    public string agentLayerName = "agent"; // Nombre del layer de los agentes (por defecto "agent")
+    public bool ignoreAgentColliders = true; // Option to determine whether to ignore collisions with agents
+    public string agentLayerName = "agent"; // Name of the layer for agents (default "agent")
 
     private void Start()
     {
         if (agentGameObject != null)
         {
+            // Create specified number of clones
             for (int i = 1; i <= numClones; i++)
             {
-                GameObject clonedObject = Instantiate(agentGameObject); // Crea una copia del objeto original
-                clonedObject.name = agentGameObject.name + "_" + i; // Asigna un nombre único basado en el nombre del objeto original y el número de instancia
+                GameObject clonedObject = Instantiate(agentGameObject); // Create a copy of the original object
+                clonedObject.name = agentGameObject.name + "_" + i; // Assign a unique name based on the original object's name and instance number
                 
-                // Ignorar colisiones con otros GameObjects que tengan la capa señalada
+                // Ignore collisions with other GameObjects that have the specified layer
                 if (ignoreAgentColliders)
                 {
                     IgnoreAgentCollisions(clonedObject);
                 }
             }
 
+            // Ignore collisions for the original agent GameObject as well
             if (ignoreAgentColliders)
             {
                 IgnoreAgentCollisions(agentGameObject);
@@ -36,20 +38,21 @@ public class CloneAgent : MonoBehaviour
 
     private void IgnoreAgentCollisions(GameObject clonedObject)
     {
-        // Obtener todos los colliders en el Layer de los agentes
+        // Get all colliders in the agent Layer
         LayerMask agentLayer = LayerMask.GetMask(agentLayerName);
         Collider[] agentColliders = Physics.OverlapSphere(clonedObject.transform.position, Mathf.Infinity, agentLayer);
 
-        // Ignorar colisiones con los colliders de los otros agentes
+        // Ignore collisions with colliders of other agents
         foreach (Collider collider in agentColliders)
         {
-            if (collider != clonedObject.GetComponent<Collider>()) // Evitar ignorar la colisión con uno mismo
+            if (collider != clonedObject.GetComponent<Collider>()) // Avoid ignoring collision with self
             {
                 Physics.IgnoreCollision(clonedObject.GetComponent<Collider>(), collider, true);
             }
         }
     }
 }
+
 
 
 
