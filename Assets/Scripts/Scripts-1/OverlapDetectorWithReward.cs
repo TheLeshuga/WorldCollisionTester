@@ -6,24 +6,24 @@ public class OverlapDetectorWithReward : MonoBehaviour
 {
     public event Action<float> OnCollisionDetected;
 
-    public enum OverlapType { Capsule, Box, Sphere }; // Enum para elegir el tipo de overlap
+    public enum OverlapType { Capsule, Box, Sphere }; // Enum to choose the type of overlap
 
-    public List<string> layersToDetect; // Lista de nombres de capas que deseamos detectar
+    public List<string> layersToDetect; // List of layer names we want to detect
 
-    public OverlapType overlapType = OverlapType.Capsule; // Tipo de overlap por defecto
-    public float detectionRadius = 0.3f; // El radio de deteccion
+    public OverlapType overlapType = OverlapType.Capsule; // Default overlap type
+    public float detectionRadius = 0.3f; // Detection radius
 
-    // Lista para almacenar los puntos de colision y sus rangos
+    // List to store collision points and their ranges
     private List<(Vector3 point, float range)> collisionPoints = new List<(Vector3, float)>();
 
     private CSVManager csvManager;
 
     void Start()
     {
-        // Obtener la referencia al script CSVManager del GameObject que lo contiene
+        // Get reference to the CSVManager script of the GameObject containing it
         csvManager = GameObject.FindObjectOfType<CSVManager>();
 
-        // Verificar si se encontró el CSVManager
+        // Check if CSVManager is found
         if (csvManager == null)
         {
             Debug.LogError("Could not find the CSVManager component in the scene.");
@@ -35,19 +35,19 @@ public class OverlapDetectorWithReward : MonoBehaviour
         Collider[] colliders;
         if (overlapType == OverlapType.Capsule)
         {
-            // Utiliza OverlapCapsule si se selecciona esa opcion
+            // Use OverlapCapsule if that option is selected
             colliders = Physics.OverlapCapsule(transform.position - Vector3.up * detectionRadius,
                                                 transform.position + Vector3.up * detectionRadius,
                                                 detectionRadius);
         }
         else if (overlapType == OverlapType.Box)
         {
-            // Utiliza OverlapBox si se selecciona esa opcion
+            // Use OverlapBox if that option is selected
             colliders = Physics.OverlapBox(transform.position, new Vector3(detectionRadius, detectionRadius, detectionRadius));
         }
         else
         {
-            // Utiliza OverlapSphere si se selecciona esa opcion
+            // Use OverlapSphere if that option is selected
             colliders = Physics.OverlapSphere(transform.position, detectionRadius);
         }
 
@@ -58,7 +58,7 @@ public class OverlapDetectorWithReward : MonoBehaviour
                 Vector3 collisionPoint = collider.ClosestPoint(transform.position);
                 bool foundCollision = false;
 
-                // Verificar si el punto de colision esta dentro de algun rango almacenado
+                // Check if the collision point is within any stored range
                 foreach ((Vector3 point, float range) in collisionPoints)
                 {
                     if (Vector3.Distance(point, collisionPoint) <= range)
@@ -73,9 +73,9 @@ public class OverlapDetectorWithReward : MonoBehaviour
 
                 if (!foundCollision)
                 {
-                    // Si no se encuentra el punto de colision en ningun rango, agregarlo a la lista
+                    // If the collision point is not found within any range, add it to the list
                     collisionPoints.Add((collisionPoint, 1.0f));
-                    if (csvManager != null  && csvManager.enabled) csvManager.SaveVector(collisionPoint, gameObject.name, collider.gameObject.name);
+                    if (csvManager != null && csvManager.enabled) csvManager.SaveVector(collisionPoint, gameObject.name, collider.gameObject.name);
                     OnCollisionDetected?.Invoke(1.0f);
                     Debug.Log("Reached: " + LayerMask.LayerToName(collider.gameObject.layer) + " at position: " + collisionPoint);
                 }
@@ -88,30 +88,30 @@ public class OverlapDetectorWithReward : MonoBehaviour
     {
         if (overlapType == OverlapType.Capsule)
         {
-            // Dibuja una capsula en el editor si se usa OverlapCapsule
+            // Draw a capsule in the editor if OverlapCapsule is used
             DrawWireCapsule(transform.position, detectionRadius, transform.up, Color.red);
         }
         else if (overlapType == OverlapType.Box)
         {
-            // Dibuja un box en el editor si se usa OverlapBox
+            // Draw a box in the editor if OverlapBox is used
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(transform.position, new Vector3(detectionRadius * 2, detectionRadius * 2, detectionRadius * 2));
         }
         else
         {
-            // Dibuja una esfera en el editor si se usa OverlapSphere
+            // Draw a sphere in the editor if OverlapSphere is used
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, detectionRadius);
         }
     }
 
-    // Funcion para dibujar una capsula en el editor usando Gizmos
+    // Function to draw a capsule in the editor using Gizmos
     void DrawWireCapsule(Vector3 center, float radius, Vector3 direction, Color color)
     {
         Vector3 start = center + direction * radius;
         Vector3 end = center - direction * radius;
 
-        // Dibuja los segmentos de la capsula
+        // Draw segments of the capsule
         DrawGizmosLine(start + Vector3.right * radius, end + Vector3.right * radius, color);
         DrawGizmosLine(start - Vector3.right * radius, end - Vector3.right * radius, color);
         DrawGizmosLine(start + Vector3.forward * radius, end + Vector3.forward * radius, color);
@@ -125,11 +125,11 @@ public class OverlapDetectorWithReward : MonoBehaviour
         DrawGizmosLine(start + forward, end + forward, color);
         DrawGizmosLine(start - forward, end - forward, color);
 
-        // Dibujar la linea que atraviesa todo el centro
+        // Draw the line traversing through the center
         DrawGizmosLine(start + direction * radius, end - direction * radius, color);
     }
 
-    // Funcion para dibujar una linea con Gizmos
+    // Function to draw a line with Gizmos
     void DrawGizmosLine(Vector3 start, Vector3 end, Color color)
     {
         Gizmos.color = color;

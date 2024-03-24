@@ -21,7 +21,7 @@ public class CSVManagerHM : MonoBehaviour
             Directory.CreateDirectory(folderPath); 
             filePath = Path.Combine(folderPath, fileName);
 
-            // Initialize dictionaries
+            // Initialize dictionaries to store vector counts and colors
             vectorCounts = new Dictionary<Vector3, int>();
             vectorColors = new Dictionary<Vector3, Color>();
 
@@ -32,10 +32,12 @@ public class CSVManagerHM : MonoBehaviour
 
     void SaveDataHM()
     {
+        // Get a unique file path to avoid overwriting existing files
         string uniqueFilePath = GetUniqueFilePath(filePath);
 
         StringBuilder sb = new StringBuilder();
 
+        // Iterate through each vector and its count
         foreach (var kvp in vectorCounts)
         {
             Vector3 vector = kvp.Key;
@@ -46,15 +48,17 @@ public class CSVManagerHM : MonoBehaviour
             sb.AppendLine($"({vector.x},{vector.y},{vector.z});{count};({color.r},{color.g},{color.b}),{color.a}");
         }
 
+        // Write the CSV content to the file
         File.WriteAllText(uniqueFilePath, sb.ToString());
     }
 
-    // Method to find a unique file path
+    // Method to find a unique file path to avoid overwriting existing files
     private string GetUniqueFilePath(string originalPath)
     {
         int index = 1;
         string newPath = originalPath;
 
+        // Check if the file exists, if so, add an index to the file name
         while (File.Exists(newPath))
         {
             index++;
@@ -67,7 +71,7 @@ public class CSVManagerHM : MonoBehaviour
         return newPath;
     }
 
-    // Method to save a Vector3 
+    // Method to save a Vector3 and its corresponding color
     public void SaveVector(Vector3 vector, Color positionColor)
     {
 
@@ -82,8 +86,9 @@ public class CSVManagerHM : MonoBehaviour
             vectorCounts[vector] = 1;
         }
 
-        // Update or add color
+        // Update or add color associated with the vector
         vectorColors[vector] = positionColor;
     }
 }
+
 

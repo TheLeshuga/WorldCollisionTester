@@ -3,22 +3,24 @@ using System.Collections.Generic;
 
 public class HeatMapColorizer : MonoBehaviour
 {
-    public float allowableDistance = 2f; 
-    public float colorAdjuster = 0.2f;  
+    public float allowableDistance = 2f; // Maximum distance for color adjustment
+    public float colorAdjuster = 0.2f;    // Amount to adjust color by
 
-    private Color color = Color.blue;
+    private Color color = Color.blue;     // Base color for heat map visualization
 
-    private bool setColorsDone = false;
-    private float Xshift;
-    private GameObject[] heatBoxes;
+    private bool setColorsDone = false;   // Flag to check if color adjustment is done
+    private float Xshift;                  // Shift in X-coordinate for positioning
 
-    private Dictionary<Vector3, GameObject> cubeDictionary = new Dictionary<Vector3, GameObject>();
+    private GameObject[] heatBoxes;       // Array to store heat boxes
 
-    private CSVManagerHM csvManagerHM;
+    private Dictionary<Vector3, GameObject> cubeDictionary = new Dictionary<Vector3, GameObject>(); // Dictionary to map positions to cubes
+
+    private CSVManagerHM csvManagerHM;     // Reference to CSVManagerHM for saving data
 
     void Start() {
-    heatBoxes = GameObject.FindGameObjectsWithTag("heatBox");
+        heatBoxes = GameObject.FindGameObjectsWithTag("heatBox");
 
+        // Assign color and populate cube dictionary
         foreach (GameObject item in heatBoxes)
         {
             Renderer renderer = item.GetComponent<Renderer>();
@@ -27,6 +29,7 @@ public class HeatMapColorizer : MonoBehaviour
             cubeDictionary.Add(item.transform.position, item);
         }
 
+        // Get Xshift from HeatMapReader if available
         HeatMapReader heatMapReader = FindObjectOfType<HeatMapReader>();
         if (heatMapReader != null)
         {
@@ -37,6 +40,7 @@ public class HeatMapColorizer : MonoBehaviour
             Debug.LogError("Could not find the HeatMapReader component in the scene.");
         }
 
+        // Find CSVManagerHM component
         csvManagerHM = GameObject.FindObjectOfType<CSVManagerHM>();
 
         if (csvManagerHM == null)
@@ -48,21 +52,25 @@ public class HeatMapColorizer : MonoBehaviour
 
     void Update()
     {
+        // Check if heatmap data processing is finished and colors are not set yet
         if (HeatMapReader.finished && !setColorsDone)
-            HeatMapReader.finished = false;
-            SetColor();
+        {
+            HeatMapReader.finished = false; // Reset finished flag
+            SetColor(); // Set colors based on heatmap data
+        }
     }
 
+    // Method to adjust colors based on heatmap data
     void SetColor()
     {
         List<Vector3> positions = HeatMapReader.nearestPositions;
-        HeatMapReader.nearestPositions = new List<Vector3>();
+        HeatMapReader.nearestPositions = new List<Vector3>(); // Reset nearest positions
 
         if(positions != null) {
             foreach (Vector3 position in positions)
             {
                 Vector3 adjustedPosition = position;
-                adjustedPosition.x += Xshift;
+                adjustedPosition.x += Xshift; // Adjust position based on Xshift
 
                 if (cubeDictionary.ContainsKey(adjustedPosition))
                 {
@@ -70,6 +78,7 @@ public class HeatMapColorizer : MonoBehaviour
                     Renderer renderer = cube.GetComponent<Renderer>();
                     Color currentColor = renderer.material.color;
 
+                    // Adjust color based on current values
                     if (currentColor.g < 1f && currentColor.b != 0f)
                     {
                         currentColor.g += colorAdjuster;
@@ -81,19 +90,21 @@ public class HeatMapColorizer : MonoBehaviour
                         currentColor.g -= colorAdjuster;
                     }
 
+                    // Clamp color values between 0 and 1
                     currentColor.r = Mathf.Clamp01(currentColor.r);
                     currentColor.g = Mathf.Clamp01(currentColor.g);
                     currentColor.b = Mathf.Clamp01(currentColor.b);
 
                     renderer.material.color = currentColor;
+
+                    // Save position and color data to CSV
                     if(csvManagerHM != null  && csvManagerHM.enabled) csvManagerHM.SaveVector(position, currentColor);
                 }
             }
-            setColorsDone = true;
+            setColorsDone = true; // Mark color adjustment as done
         }
     }
-
-
 }
+
 
 

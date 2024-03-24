@@ -44,11 +44,11 @@ public class CSVManager : MonoBehaviour
             Vector3 vector = kvp.Key;
             int count = kvp.Value;
 
-            // Convertir la lista de nombres de objetos a una cadena separada por comas
+            // Convert the list of object and agent names to a comma-separated string
             string agentNames = string.Join(",", vectorAgentObjects[vector].ToArray());
             string objectNames = string.Join(",", vectorObjectsName[vector].ToArray());
 
-            // Append vector, count, and object names to CSV line
+            // Append vector, count, object names and agent names to CSV line
             sb.AppendLine($"({vector.x},{vector.y},{vector.z});{count};{objectNames};{agentNames}");
         }
 
@@ -73,7 +73,7 @@ public class CSVManager : MonoBehaviour
         return newPath;
     }
 
-    // Method to save a Vector3 and object name to the data dictionaries
+    // Method to save a Vector3, agent name and object name to the data dictionaries
     public void SaveVector(Vector3 vector, string agentName, string objectName)
     {
         // Check if a similar vector already exists
@@ -83,7 +83,7 @@ public class CSVManager : MonoBehaviour
         {
             // Increment count if similar vector found
             vectorCounts[similarVector]++;
-            // Add object name to the list for the similar vector
+            // Add object and agent name to the list for the similar vector
             if (!vectorAgentObjects[similarVector].Contains(agentName)) vectorAgentObjects[similarVector].Add(agentName);
             if (!vectorObjectsName[similarVector].Contains(objectName)) vectorObjectsName[similarVector].Add(objectName);
         }

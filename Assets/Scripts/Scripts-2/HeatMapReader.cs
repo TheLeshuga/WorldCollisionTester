@@ -3,20 +3,22 @@ using System.Collections.Generic;
 
 public class HeatMapReader : MonoBehaviour
 {
-    public float readFrequency = 20f;
-    public float Xshift = 50f;
+    public float readFrequency = 20f;   // Frequency of data reading
+    public float Xshift = 50f;          // X-axis shift for positioning
 
-    public static bool finished = false;
+    public static bool finished = false;    // Flag indicating if reading is finished
 
-    private PositionData[] positionDatas;
-    private List<Vector3> allPositions;
+    private PositionData[] positionDatas;   // Array to store PositionData components
+    private List<Vector3> allPositions;     // List to store all positions
     
-    public static List<Vector3> nearestPositions;
+    public static List<Vector3> nearestPositions; // List to store nearest positions
 
     void Start()
     {
+        // Start periodic data reading
         InvokeRepeating("ReadData", readFrequency, readFrequency);
         
+        // Get GridMap or GridMapRegulated component and initialize positions
         GridMap gridMap = GetComponent<GridMap>();
         GridMapRegulated gridMapRegulated = GetComponent<GridMapRegulated>();
         
@@ -34,15 +36,20 @@ public class HeatMapReader : MonoBehaviour
 
     void ReadData()
     {
+        // Find all PositionData components in the scene
         positionDatas = FindObjectsOfType<PositionData>();
 
+        // Combine positions from all PositionData components
         Vector3[] combinedPositions = CombinePositionArrays(positionDatas);
 
+        // Find nearest positions for combined positions
         FindNearestPositions(combinedPositions);
 
+        // Reset position data arrays
         ResetPositionDataArrays();
     }
 
+    // Combine position arrays from PositionData components
     Vector3[] CombinePositionArrays(PositionData[] positionDatas)
     {
         List<Vector3> combinedPositions = new List<Vector3>();
@@ -58,6 +65,7 @@ public class HeatMapReader : MonoBehaviour
         return combinedPositions.ToArray();
     }
 
+    // Reset position data arrays
     void ResetPositionDataArrays()
     {
         foreach (PositionData positionData in positionDatas)
@@ -69,8 +77,11 @@ public class HeatMapReader : MonoBehaviour
         }
     }
 
+    // Find nearest positions for combined positions
     void FindNearestPositions(Vector3[] combinedPositions)
     {
+        nearestPositions = new List<Vector3>();
+
         foreach (Vector3 combinedPos in combinedPositions)
         {
             float minDistance = Mathf.Infinity;
@@ -94,7 +105,7 @@ public class HeatMapReader : MonoBehaviour
             nearestPositions.Add(nearestPos);
         }
 
-        finished = true;
+        finished = true; // Mark reading as finished
     }
-
 }
+
