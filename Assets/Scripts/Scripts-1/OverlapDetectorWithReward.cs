@@ -26,7 +26,7 @@ public class OverlapDetectorWithReward : MonoBehaviour
         // Verificar si se encontró el CSVManager
         if (csvManager == null)
         {
-            Debug.LogError("No CSVManager script found in the scene.");
+            Debug.LogError("Could not find the CSVManager component in the scene.");
         }
     }
 

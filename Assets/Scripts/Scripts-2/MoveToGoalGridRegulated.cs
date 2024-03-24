@@ -35,17 +35,14 @@ public class MoveToGoalGridRegulated : Agent
     }
 
     public override void OnEpisodeBegin() {
-        if (possiblePositions.Count == 0)
-        {
+        if (possiblePositions.Count == 0) {
             Debug.LogError("possiblePositions list is empty.");
+        } else {
+            int randomIndex = Random.Range(0, possiblePositions.Count);
+
+            transform.localPosition = possiblePositions[randomIndex];
+            transform.localRotation = Quaternion.identity;
         }
-
-        int randomIndex = Random.Range(0, possiblePositions.Count);
-        //Vector3 randomPosition = possiblePositions[randomIndex];
-
-        transform.localPosition = possiblePositions[randomIndex];
-        //new Vector3(randomPosition.x, 0, randomPosition.z);   //CAMBIAR Y
-        transform.localRotation = Quaternion.identity;
     }
 
     public override void CollectObservations(VectorSensor sensor) {
