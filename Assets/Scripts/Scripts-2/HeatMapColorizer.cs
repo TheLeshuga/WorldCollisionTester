@@ -45,7 +45,7 @@ public class HeatMapColorizer : MonoBehaviour
 
         if (csvManagerHM == null)
         {
-            Debug.LogError("Could not find the CSVManagerHM component in the scene.");
+            Debug.LogWarning("Could not find the CSVManagerHM component in the scene.");
         }
     }
 
