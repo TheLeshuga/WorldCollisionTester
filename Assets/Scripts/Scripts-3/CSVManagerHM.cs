@@ -44,8 +44,11 @@ public class CSVManagerHM : MonoBehaviour
             int count = kvp.Value;
             Color color = vectorColors[vector];
 
+            Color32 color32 = color;
+            string hexColor = "#" + color32.r.ToString("X2") + color32.g.ToString("X2") + color32.b.ToString("X2");
+
             // Append vector, count, and color components to CSV line
-            sb.AppendLine($"({vector.x},{vector.y},{vector.z});{count};({color.r},{color.g},{color.b}),{color.a}");
+            sb.AppendLine($"({vector.x},{vector.y},{vector.z});{count};({color.r},{color.g},{color.b}),{color.a};{hexColor}");
         }
 
         // Write the CSV content to the file
