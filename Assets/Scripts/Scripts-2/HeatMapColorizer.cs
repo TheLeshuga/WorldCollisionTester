@@ -14,6 +14,8 @@ public class HeatMapColorizer : MonoBehaviour
 
     private Dictionary<Vector3, GameObject> cubeDictionary = new Dictionary<Vector3, GameObject>();
 
+    private CSVManagerHM csvManagerHM;
+
     void Start() {
     heatBoxes = GameObject.FindGameObjectsWithTag("heatBox");
 
@@ -34,6 +36,13 @@ public class HeatMapColorizer : MonoBehaviour
         {
             Debug.LogError("Could not find the HeatMapReader component in the scene.");
         }
+
+        csvManagerHM = GameObject.FindObjectOfType<CSVManagerHM>();
+
+        if (csvManagerHM == null)
+        {
+            Debug.LogError("Could not find the CSVManagerHM component in the scene.");
+        }
     }
 
 
@@ -49,31 +58,39 @@ public class HeatMapColorizer : MonoBehaviour
         List<Vector3> positions = HeatMapReader.nearestPositions;
         HeatMapReader.nearestPositions = new List<Vector3>();
 
-        foreach (Vector3 position in positions)
-        {
-            Vector3 adjustedPosition = position;
-            adjustedPosition.x += Xshift;
-
-            if (cubeDictionary.ContainsKey(adjustedPosition))
+        if(positions != null) {
+            foreach (Vector3 position in positions)
             {
-                GameObject cube = cubeDictionary[adjustedPosition];
-                Renderer renderer = cube.GetComponent<Renderer>();
-                Color currentColor = renderer.material.color;
+                Vector3 adjustedPosition = position;
+                adjustedPosition.x += Xshift;
 
-                if (currentColor.g < 1f && currentColor.b != 0f)
+                if (cubeDictionary.ContainsKey(adjustedPosition))
                 {
-                    currentColor.g += colorAdjuster;
-                    currentColor.b -= colorAdjuster;
+                    GameObject cube = cubeDictionary[adjustedPosition];
+                    Renderer renderer = cube.GetComponent<Renderer>();
+                    Color currentColor = renderer.material.color;
+
+                    if (currentColor.g < 1f && currentColor.b != 0f)
+                    {
+                        currentColor.g += colorAdjuster;
+                        currentColor.b -= colorAdjuster;
+                    }
+                    else
+                    {
+                        currentColor.r += colorAdjuster;
+                        currentColor.g -= colorAdjuster;
+                    }
+
+                    currentColor.r = Mathf.Clamp01(currentColor.r);
+                    currentColor.g = Mathf.Clamp01(currentColor.g);
+                    currentColor.b = Mathf.Clamp01(currentColor.b);
+
+                    renderer.material.color = currentColor;
+                    if(csvManagerHM != null  && csvManagerHM.enabled) csvManagerHM.SaveVector(position, currentColor);
                 }
-                else
-                {
-                    currentColor.r += colorAdjuster;
-                    currentColor.g -= colorAdjuster;
-                }
-                renderer.material.color = currentColor;
             }
+            setColorsDone = true;
         }
-        setColorsDone = true;
     }
 
 
