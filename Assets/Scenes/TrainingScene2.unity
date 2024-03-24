@@ -811,7 +811,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332685555}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b83222e7b4f7784fa8bae6de2403629, type: 3}
   m_Name: 
@@ -1335,6 +1335,7 @@ GameObject:
   - component: {fileID: 530495234}
   - component: {fileID: 530495235}
   - component: {fileID: 530495236}
+  - component: {fileID: 530495237}
   m_Layer: 0
   m_Name: Scripter
   m_TagString: Untagged
@@ -1355,7 +1356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentGameObject: {fileID: 332685555}
-  numClones: 20
+  numClones: 15
   ignoreAgentColliders: 1
   agentLayerName: agent
 --- !u!4 &530495231
@@ -1392,20 +1393,6 @@ MonoBehaviour:
   - {fileID: 639992394}
   - {fileID: 363082550}
   - {fileID: 880397537}
-  floorWidths:
-  - 15
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  floorHeights:
-  - 25
-  - 32
-  - 10
-  - 10
-  - 22
-  - 8
   cellSizeList:
   - 2
   - 2
@@ -1427,6 +1414,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   debugMode: 0
+  floorWidths:
+  - 15
+  - 8
+  - 8
+  - 8
+  - 8
+  - 8
+  floorHeights:
+  - 25
+  - 32
+  - 10
+  - 10
+  - 22
+  - 8
 --- !u!114 &530495234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1434,7 +1435,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530495229}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09b38631144aaf4488395e19600d9ffb, type: 3}
   m_Name: 
@@ -1448,7 +1449,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530495229}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00a7411de0695df4e8bce01425413fd3, type: 3}
   m_Name: 
@@ -1462,12 +1463,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530495229}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7df799c981a2dd479d5ce69e37cf456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: Agent25_model_res
+--- !u!114 &530495237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530495229}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda3f8dacfa0c914f9476d23cc739532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: prueba
 --- !u!1001 &604050331
 PrefabInstance:
   m_ObjectHideFlags: 0

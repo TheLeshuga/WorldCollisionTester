@@ -903,7 +903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentGameObject: {fileID: 332685555}
-  numClones: 0
+  numClones: 5
   ignoreAgentColliders: 1
   agentLayerName: agent
 --- !u!4 &530495231
@@ -933,8 +933,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9e0f4f5d84eab4e86502dba1b6a48e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorObjects:
-  - {fileID: 919132148764693818}
   lowerLeftCornerPositions:
   - {fileID: 1785169108}
   cellSizeList:
@@ -947,7 +945,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  debugMode: 1
+  debugMode: 0
+  floorObjects:
+  - {fileID: 919132148764693818}
 --- !u!114 &530495233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -955,25 +955,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530495229}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50b98bb5e4073ac429cfbb45da305fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lowerLeftCornerPositions:
-  - {fileID: 1785169108}
   - {fileID: 665742755}
-  floorWidths:
-  - 20
-  - 10
-  floorHeights:
-  - 20
-  - 10
   cellSizeList:
   - 2
-  - 2
   gridCubeYSize:
-  - 2
   - 2
   obstacleLayer:
     serializedVersion: 2
@@ -981,7 +972,11 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  debugMode: 1
+  debugMode: 0
+  floorWidths:
+  - 10
+  floorHeights:
+  - 10
 --- !u!1001 &604050331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1842,7 +1837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1672919547
 BoxCollider:
   m_ObjectHideFlags: 0
