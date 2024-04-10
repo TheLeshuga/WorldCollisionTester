@@ -5,11 +5,12 @@ public class HeatMapReader : MonoBehaviour
 {
     public float readFrequency = 20f;   // Frequency of data reading
     public float Xshift = 50f;          // X-axis shift for positioning
+    public float nearestPosOffset = 0.5f;   // Offset to find the nearest position on the grid
 
     public static bool finished = false;    // Flag indicating if reading is finished
 
     private PositionData[] positionDatas;   // Array to store PositionData components
-    private List<Vector3> allPositions;     // List to store all positions
+    private List<Vector3> allPositions = new List<Vector3>();     // List to store all positions
     
     public static List<Vector3> nearestPositions; // List to store nearest positions
 
@@ -24,12 +25,12 @@ public class HeatMapReader : MonoBehaviour
         
         if (gridMap != null && gridMap.enabled)
         {
-            allPositions = gridMap.ReceiveAllPositions();
+            allPositions.AddRange(gridMap.ReceiveAllPositions());
             gridMap.CreateHeatMapGrid(Xshift);
         }
-        else if (gridMapRegulated != null && gridMapRegulated.enabled)
+        if (gridMapRegulated != null && gridMapRegulated.enabled)
         {
-            allPositions = gridMapRegulated.ReceiveAllPositions();
+            allPositions.AddRange(gridMapRegulated.ReceiveAllPositions());
             gridMapRegulated.CreateHeatMapGrid(Xshift);
         }
     }
@@ -92,7 +93,7 @@ public class HeatMapReader : MonoBehaviour
                 float distance = Vector3.Distance(combinedPos, pos);
                 if (distance < minDistance)
                 {
-                    if (distance <= 0.5f)
+                    if (distance <= nearestPosOffset)
                     {
                         nearestPos = pos;
                         break;
@@ -102,7 +103,7 @@ public class HeatMapReader : MonoBehaviour
                 }
             }
 
-            nearestPositions.Add(nearestPos);
+            if (Vector3.Distance(combinedPos, nearestPos) < nearestPosOffset * 2) nearestPositions.Add(nearestPos);
         }
 
         finished = true; // Mark reading as finished
