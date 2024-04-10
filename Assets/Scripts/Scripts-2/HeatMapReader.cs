@@ -22,12 +22,12 @@ public class HeatMapReader : MonoBehaviour
         GridMap gridMap = GetComponent<GridMap>();
         GridMapRegulated gridMapRegulated = GetComponent<GridMapRegulated>();
         
-        if (gridMap != null)
+        if (gridMap != null && gridMap.enabled)
         {
             allPositions = gridMap.ReceiveAllPositions();
             gridMap.CreateHeatMapGrid(Xshift);
         }
-        else if (gridMapRegulated != null)
+        else if (gridMapRegulated != null && gridMapRegulated.enabled)
         {
             allPositions = gridMapRegulated.ReceiveAllPositions();
             gridMapRegulated.CreateHeatMapGrid(Xshift);
@@ -42,11 +42,11 @@ public class HeatMapReader : MonoBehaviour
         // Combine positions from all PositionData components
         Vector3[] combinedPositions = CombinePositionArrays(positionDatas);
 
-        // Find nearest positions for combined positions
-        FindNearestPositions(combinedPositions);
-
         // Reset position data arrays
         ResetPositionDataArrays();
+
+        // Find nearest positions for combined positions
+        FindNearestPositions(combinedPositions);
     }
 
     // Combine position arrays from PositionData components

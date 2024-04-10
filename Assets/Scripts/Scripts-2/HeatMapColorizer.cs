@@ -53,7 +53,7 @@ public class HeatMapColorizer : MonoBehaviour
     void Update()
     {
         // Check if heatmap data processing is finished and colors are not set yet
-        if (HeatMapReader.finished && !setColorsDone)
+        if (HeatMapReader.finished)
         {
             HeatMapReader.finished = false; // Reset finished flag
             SetColor(); // Set colors based on heatmap data
@@ -101,7 +101,6 @@ public class HeatMapColorizer : MonoBehaviour
                     if(csvManagerHM != null  && csvManagerHM.enabled) csvManagerHM.SaveVector(position, currentColor);
                 }
             }
-            setColorsDone = true; // Mark color adjustment as done
         }
     }
 }
