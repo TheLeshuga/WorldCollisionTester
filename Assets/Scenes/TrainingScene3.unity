@@ -921,7 +921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentGameObject: {fileID: 332685555}
   numClones: 5
-  ignoreAgentColliders: 1
+  ignoreAgentColliders: 0
   agentLayerName: agent
 --- !u!4 &530495231
 Transform:
@@ -972,7 +972,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530495229}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50b98bb5e4073ac429cfbb45da305fc2, type: 3}
   m_Name: 
@@ -1008,6 +1008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   readFrequency: 10
   Xshift: 30
+  nearestPosOffset: 0.5
 --- !u!114 &530495235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,7 +1035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda3f8dacfa0c914f9476d23cc739532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: default
+  fileName: estonovaaworkear
 --- !u!1001 &604050331
 PrefabInstance:
   m_ObjectHideFlags: 0
