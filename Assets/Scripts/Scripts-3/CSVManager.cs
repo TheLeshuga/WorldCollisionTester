@@ -49,7 +49,7 @@ public class CSVManager : MonoBehaviour
             string objectNames = string.Join(",", vectorObjectsName[vector].ToArray());
 
             // Append vector, count, object names and agent names to CSV line
-            sb.AppendLine($"({vector.x},{vector.y},{vector.z});{count};{objectNames};{agentNames}");
+            sb.AppendLine($"({vector.x}/{vector.y}/{vector.z});{count};{objectNames};{agentNames}");
         }
 
         File.WriteAllText(uniqueFilePath, sb.ToString());
