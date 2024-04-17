@@ -11,6 +11,10 @@ World Collision Tester is a library for the Unity game engine to facilitate the 
 This library, combined with [ML-Agents](https://github.com/Unity-Technologies/ml-agents) to train the agents, offers the ability to clone agents to improve training, detect collisions with objects that should not be traversed, adapting to the different possible shapes of the character, create a heat map of the areas through which the agent has passed, and generate reports on the errors found and the heat map.
 
 ## Functionality 
+- ```Detect collision errors:``` Check collisions of the agent simulating the game character with the environment to report bugs.
+- ```Heat Map:``` It generates a heat map that reflects the shape of the specified scenario, and adjusts the colour of the areas according to the frequency of the agent's steps in each zone.
+- ```Collision error report:``` Generates a CSV file containing information about the errors, such as the position, the number of occurrences of the error, the name of the object involved and the names of the agents that encountered the error.
+- ```Heat Map report:``` Generates a CSV file containing information about the heat map such as the position of the grid cell, the number of times the grid cell was walked over and the colour of the cell.
 
 ## Used Technologies
 
