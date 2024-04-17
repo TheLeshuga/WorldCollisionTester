@@ -1,2 +1,26 @@
 # World Collision Tester
-World Collision Tester in Video Games Using RL-PPO
+  <p align="left">
+   <img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
+   </p>
+   
+## About
+World Collision Tester is a library for the Unity game engine to facilitate the search for world collision errors by using agents trained with RL-PPO to find those errors.
+
+![scene](https://github.com/TheLeshuga/WorldCollisionTester/assets/72620125/7c7422b1-8882-47bf-b4d5-e3372a55ccf4)
+
+This library, combined with [ML-Agents](https://github.com/Unity-Technologies/ml-agents) to train the agents, offers the ability to clone agents to improve training, detect collisions with objects that should not be traversed, adapting to the different possible shapes of the character, create a heat map of the areas through which the agent has passed, and generate reports on the errors found and the heat map.
+
+## Functionality 
+
+## Used Technologies
+
+- Unity (2023.1.13f1)
+- C#
+- ML-Agents
+
+## Installation Step
+## User Manual
+## License
+This project is licensed under the GPL-3.0 license. You can find the full text of the license in the [LICENSE](LICENSE) file.
+## Author
+This project was created by Sira Garcerán García.
