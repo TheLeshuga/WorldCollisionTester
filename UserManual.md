@@ -63,3 +63,28 @@ public override void OnActionReceived(ActionBuffers actions) {
   }
 }
 ```
+
+Additionally, the script OverlapDetectorWithReward must be added. This script has three variables:
+
+- ```Layers to detect:``` This variable collects the list of the layer names of the objects to be checked for collisions. Layers related to floors, walls, etc... should be listed here.
+- ```Overlap type:``` It is a combination of capsule, cube and sphere. The user will choose the shape that best suits the agent. Using the gizmos, it will be possible to see how the shape fits the agent.
+- ```Detection radius:``` A float of the size of the previously selected shape.
+
+With this script we will detect when our agent is passing through an object that it should not. That's why it's important to indicate all the layers related to the scenario, choose the shape that best suits the agent and a size that is smaller than the agent.
+
+<div style="display: flex;">
+    <img src="https://github.com/TheLeshuga/WorldCollisionTester/assets/72620125/3868a76a-c469-4f59-85e8-fde379ee4f05" alt="capsule" width="320" style="margin-right: 10px;">
+    <img src="https://github.com/TheLeshuga/WorldCollisionTester/assets/72620125/e807e438-5af2-4098-9559-b6922dcbb9ac" alt="sphere" width="230" style="margin-right: 10px;">
+    <img src="https://github.com/TheLeshuga/WorldCollisionTester/assets/72620125/c3b783b5-a83a-46db-910c-c50c48830238" alt="box" width="260">
+</div>
+
+In these images, the 3 different forms can be seen in the same agent. In this example the best option will be the capsule shape (left image) and the radius is 0.3, as it is smaller than the agent and is a good range to say that the agent passes through an object it should not.
+
+
+## Setting up the grid map
+
+In an empty object in the scene, the GridMap script, GridMapRegulated or both shall be included. These scripts that extends from BaseGridMap are two types of grid maps where the first one will directly fit the given scenario object and the second one gives the freedom to adjust it to more irregular scenarios.
+
+
+
+It is necessary to include the "heatBox" tag in the project for the correct functioning of the grid maps.
