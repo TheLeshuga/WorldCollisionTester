@@ -23,7 +23,7 @@ This library, combined with [ML-Agents](https://github.com/Unity-Technologies/ml
 - ML-Agents
 
 ## Installation Step
-It is recommended to create a virtual environment to avoid conflicts between packages and/or versions. 
+It is recommended to create a virtual environment to avoid conflicts between packages and/or versions. If you have any problem with the ML-Agents version or the compatibility between packages, you can check the installation guide from [ML-Agents installation markdown](https://github.com/Unity-Technologies/ml-agents/blob/release_18_docs/docs/Installation.md).
 
 ### Windows
 1. **Install Python:** If you haven't already, download and install Python from [python.org](https://www.python.org/downloads/) (version 3.9 or higher).
