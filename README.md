@@ -65,6 +65,9 @@ You can download the specific version of Unity used in the project from [Unity R
 
 
 ## User Manual
+
+For detailed instructions on how to use the library, please refer to the [User Manual](https://github.com/TheLeshuga/WorldCollisionTester/blob/main/UserManual.md) located in the repository.
+
 ## License
 This project is licensed under the GPL-3.0 license. You can find the full text of the license in the [LICENSE](LICENSE) file.
 ## Author
