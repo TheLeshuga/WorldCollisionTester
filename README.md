@@ -23,6 +23,42 @@ This library, combined with [ML-Agents](https://github.com/Unity-Technologies/ml
 - ML-Agents
 
 ## Installation Step
+It is recommended to create a virtual environment to avoid conflicts between packages and/or versions. 
+
+### Windows
+1. **Install Python:** If you haven't already, download and install Python from [python.org](https://www.python.org/downloads/) (version 3.9 or higher).
+
+2. **Install required packages:** Open a command prompt and run the following commands to install the required packages:
+
+```bash
+pip install torch==1.7.1
+pip install protobuf==3.20.0
+pip install mlagents==0.30.0
+```
+
+### Linux
+
+1. **Install Python:** If you haven't already, you can install Python using your package manager. For Debian-based systems like Ubuntu, you can use:
+
+```bash
+sudo apt-get update
+sudo apt-get install python3
+```
+
+2. **Install pip:** If pip is not already installed, you can install it using:
+
+```bash
+sudo apt-get install python3-pip
+```
+
+3. **Install required packages:** Open a terminal and run the following commands to install the required packages:
+
+```bash
+pip3 install torch==1.7.1
+pip3 install protobuf==3.20.0
+pip3 install mlagents==0.30.0
+```
+
 ## User Manual
 ## License
 This project is licensed under the GPL-3.0 license. You can find the full text of the license in the [LICENSE](LICENSE) file.
