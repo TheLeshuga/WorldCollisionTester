@@ -59,7 +59,7 @@ pip3 install protobuf==3.20.0
 pip3 install mlagents==0.30.0
 ```
 
-## Download Unity:
+### Download Unity:
 
 You can download the specific version of Unity used in the project from [Unity Releases](https://unity.com/releases/editor/whats-new/2023.1.13).
 
