@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class HeatMapColorizer : MonoBehaviour
 {
-    public float allowableDistance = 2f; // Maximum distance for color adjustment
     public float colorAdjuster = 0.2f;    // Amount to adjust color by
 
     private Color color = Color.blue;     // Base color for heat map visualization
