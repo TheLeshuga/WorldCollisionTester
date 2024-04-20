@@ -1102,7 +1102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentGameObject: {fileID: 332685555}
-  numClones: 5
+  numClones: 0
   ignoreAgentColliders: 1
   agentLayerName: agent
 --- !u!4 &530495231
@@ -1144,7 +1144,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  debugMode: 0
+  debugMode: 1
   floorObjects:
   - {fileID: 919132148764693818}
 --- !u!114 &530495233
@@ -1422,7 +1422,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668937996}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
