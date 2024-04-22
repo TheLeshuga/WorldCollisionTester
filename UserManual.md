@@ -224,3 +224,23 @@ For the heatmap to be created, all three of these scripts need to be active in t
 </div>
 
 In the image on the right, you can see how the heat map should look in the first instance. You can also see how the heat map is like a "copy" of the grids. In the image on the left, you see cells with different colours and intensities after a few minutes of execution.
+
+## Visualise your heat map data
+
+As well as for the reporting of found errors, there is also a script similar to CSVManager collecting the heat map information with the CSVManagerHM script. Add the CSVManagerHM script to the empty object in the scene to get the report. This script will generate a .csv file with the information per row of: the position of the cell, the number of times the agents have passed through the cell, the colour of the cell in Colour format and the colour in hexadecimal format. Here is an example of a row that would generate:
+
+```
+(-4,573728/-0,2042823/3,84873);3;(0,5/0,5/0)/1;#808000
+```
+
+Note that the colour format is formatted as RGB in brackets and the alpha next to it. To use this functionality, in addition to adding the component to the scene, it must be activated otherwise it will not generate the results. The only configuration you will need to do is to enter the name of the csv to generate. The first time it will generate within the project a directory called "ResultsCSV-HM" where all the files .csv generated with this script will be saved. If there is already a file with the name that has been entered, it will not be rewritten, it will create the file with the same name but adding the copy number.
+
+Additionally, the HeatMapVisualizer script can be used to visualise the heat map once the results have been generated. Add the script to the empty object in the scene and fill in the only parameter it requires with the name of the CSV file with the data you want to visualise. HeatMapVisualizer has the following three variables:
+
+- ```Xshift:``` It is the displacement on the X-axis where we want the heat map to appear taking as origin point where the grids maps are located.
+- ```Cube size:``` This is the size of the cube you will create to represent the cells. 
+- ```Csv file name:``` This is the name of the CSV file from which the results will be taken to recreate the heat map.
+
+![heatmapvisu](https://github.com/TheLeshuga/WorldCollisionTester/assets/72620125/bd2a6de1-e2d3-40fc-8af7-828aded0b315)
+
+The image shows the cells travelled by the agent collected in the CSV file to the right of the scenario. As with the previous scripts, these two scripts will need to be active for them to work.
