@@ -204,7 +204,7 @@ You will be able to use this error report generator both in training and in mode
 
 ## Where do your agents usually go?: Heat Map
 
-Another functionality mentioned was the creation of heat maps. Another functionality mentioned was the creation of heat maps. A heat map will be created with the same surface of the configured grids where the number of times a cell has been traversed will be updated with colours. First, it will be necessary to add the PositionData script to the agent. With this script, the positions that the agent passes through every tracking frequency seconds will be stored. Tracking frequency will be the frequency in which the position will be stored in seconds.
+Another functionality mentioned was the creation of heat maps. A heat map will be created with the same surface of the configured grids where the number of times a cell has been traversed will be updated with colours. First, it will be necessary to add the PositionData script to the agent. With this script, the positions that the agent passes through every tracking frequency seconds will be stored. Tracking frequency will be the frequency in which the position will be stored in seconds.
 
 Then, the HeatMapReader and HeatMapColorizer scripts will be added to the empty object in the scene. The first script will be in charge of processing the positions collected with PositionData to find to which cell each position corresponds and the second script will be in charge of calculating the colour that the cell should take according to the number of times it has been frequented.
 
