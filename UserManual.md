@@ -212,9 +212,9 @@ HeatMapReader has the following three variables:
 
 - ```Read frecuency:``` This is the frequency in time it will take to take the registered positions of each agent and process them.
 - ```Xshift:``` It is the displacement on the X-axis where we want the heat map to appear taking as origin point where the grids maps are located.
-- ```Nearest pos offset:``` It is the minimum distance you must have to take that an agent position is in a cell. It is important that the size is not too small, the sizes used for grid cells should be taken into account.
+- ```Nearest pos offset:``` It is the minimum distance you must have to take that an agent position is in a cell. It is important that the size is not too small, the sizes used for grid cells should be taken into account. It is recommended that you choose a size equal to or smaller than the grid with the smallest cell size.
 
-HeatMapColorizer has only the Color adjuster variable, this variable will be the value that adds to the colour for each position in the cell. The colour range will be from dark blue if it has not been frequented to deep red if it has been frequented a lot. It is recommended that if you are going to use many agents or you are going to leave a long execution, the number should be very small. The range shall be from 0 to 1.
+HeatMapColorizer has only the Color adjuster variable, this variable will be the value that adds to the colour for each position in the cell. The colour range will be from dark blue if it has not been frequented to deep red if it has been frequented a lot. It is recommended that if you are going to use many agents or you are going to leave a long execution, the number should be very small. The allowed range is 0 to 1.
 
 For the heatmap to be created, all three of these scripts need to be active in the scene. You may encounter problems with the order of execution of the scripts, HeatMapReader should always be executed before HeatMapColorizer, if the created cubes do not appear blue, it is because it is not being executed in that order. The way to fix this is to go to Edit > Project Settings > Script Execution Order. Here you will set the grid or grids scripts in your scene to run first, then HeatMapReader and finally HeatMapColorizer.
 
