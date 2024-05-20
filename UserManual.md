@@ -101,7 +101,7 @@ Both scripts share the following variables:
     <img src="https://github.com/TheLeshuga/WorldCollisionTester/assets/72620125/31f067d0-ddb5-4ce4-940b-21d886e45d8e" alt="debugfloor" width="450">
 </div>
 
-In the image scenario the GridMap is being used. In the imagen of the right, you see the cube used for the bottom left corner (note how the Z axis faces upwards and the X axis faces to the right). In the image of the left, you see the same scenario with debug mode.
+In the image scenario the GridMap is being used. In the imagen of the left, you see the cube used for the bottom left corner (note how the Z axis faces upwards and the X axis faces to the right). In the image of the right, you see the same scenario with debug mode.
 
 The GridMap script will also have the variable Floor objects, a list of objects representing the floor of the scene. It will create the grid from these floors. The GridMapRegulated script instead, instead of accepting objects, will have two lists: Floor widths and Floor heights. Where the size of the grids must be entered. When entering the configuration of a grid, put them all in the same order and do not forget that all list variables must have the same number of objects.
 
