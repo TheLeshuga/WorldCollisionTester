@@ -210,7 +210,7 @@ Then, the HeatMapReader and HeatMapColorizer scripts will be added to the empty 
 
 HeatMapReader has the following three variables:
 
-- ```Read frecuency:``` This is the frequency in time it will take to take the registered positions of each agent and process them.
+- ```Read frecuency:``` This is the frequency in time it will take to take the registered positions of each agent and process them. This frecuency has to be higher than the tracking frecuency in PositionData.
 - ```Xshift:``` It is the displacement on the X-axis where we want the heat map to appear taking as origin point where the grids maps are located.
 - ```Nearest pos offset:``` It is the minimum distance you must have to take that an agent position is in a cell. It is important that the size is not too small, the sizes used for grid cells should be taken into account. It is recommended that you choose a size equal to or smaller than the grid with the smallest cell size.
 
